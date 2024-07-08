@@ -1,0 +1,227 @@
+#Q1: Solving the ode y'=y+e^x using RK method
+#Initial conditions: x=0,y=0,h=0.1
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x, y):
+    return y + np.exp(x)
+
+def rk4(f, a, b, y0, h):
+    n = int((b-a)/h)
+    x = np.linspace(a, b, n+1)
+    y = np.zeros(n+1)
+    y[0] = y0
+
+    for i in range(n):
+        k1 = h * f(x[i], y[i])
+        k2 = h * f(x[i] + h/2, y[i] + k1/2)
+        k3 = h * f(x[i] + h/2, y[i] + k2/2)
+        k4 = h * f(x[i] + h, y[i] + k3)
+        y[i+1] = y[i] + (k1 + 2*k2 + 2*k3 + k4) / 6
+
+    return x, y
+
+# Define the interval and step size
+a = 0
+b = 2
+h = 0.1
+
+# Initial condition
+y0 = 1
+
+# Solve the ODE using RK4 method
+x, y = rk4(f, a, b, y0, h)
+
+# Plot the solution
+plt.figure(figsize=(4,3))
+plt.plot(x, y, label='Approximate solution (RK4)')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Numerical Solution of y\' = y + e^x')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+#Q2: Solving the ode y'=1-y using RK method
+#Initial conditions: x=0,y=0,h=0.1
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x, y):
+    return 1 - y
+
+def rk4_step(x, y, h):
+    k1 = h * f(x, y)
+    k2 = h * f(x + h/2, y + k1/2)
+    k3 = h * f(x + h/2, y + k2/2)
+    k4 = h * f(x + h, y + k3)
+    return y + (k1 + 2*k2 + 2*k3 + k4) / 6
+
+def solve_ode_rk4(x0, y0, xf, h):
+    x_values = [x0]
+    y_values = [y0]
+    while x_values[-1] < xf:
+        x_new = x_values[-1] + h
+        y_new = rk4_step(x_values[-1], y_values[-1], h)
+        x_values.append(x_new)
+        y_values.append(y_new)
+    return x_values, y_values
+
+# Initial conditions
+x0 = 0
+y0 = 0.5
+
+# Range of x values
+xf = 5
+
+# Step size
+h = 0.1
+
+# Solve ODE using RK4
+x_values, y_values = solve_ode_rk4(x0, y0, xf, h)
+
+# Plot results
+plt.figure(figsize=(4,3))
+plt.plot(x_values, y_values, label='RK4 Solution', color='blue')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Solution of y\' = 1 - y using RK4')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+#Q3: Solving the ode y'= x^2-y using RK method
+#Initial conditions: x=0,y=1,h=0.1
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x, y):
+    return x**2 - y
+
+def rk4(f, a, b, y0, h):
+    n = int((b-a)/h)
+    x = np.linspace(a, b, n+1)
+    y = np.zeros(n+1)
+    y[0] = y0
+
+    for i in range(n):
+        k1 = h * f(x[i], y[i])
+        k2 = h * f(x[i] + h/2, y[i] + k1/2)
+        k3 = h * f(x[i] + h/2, y[i] + k2/2)
+        k4 = h * f(x[i] + h, y[i] + k3)
+        y[i+1] = y[i] + (k1 + 2*k2 + 2*k3 + k4) / 6
+
+    return x, y
+
+# Define the interval and step size
+a = 0
+b = 2
+h = 0.1
+
+# Initial condition
+y0 = 1
+
+# Solve the ODE using RK4 method
+x, y = rk4(f, a, b, y0, h)
+
+# Plot the solution
+plt.figure(figsize=(4,3))
+plt.plot(x, y, label='Approximate solution (RK4)')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Numerical Solution of y\' = x^2 - y')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+#Q4: Solving the ode y'= -y using RK method
+#Initial conditions: x=0,y=1,h=0.1
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x, y):
+    return -y
+
+def rk4(f, a, b, y0, h):
+    n = int((b-a)/h)
+    x = np.linspace(a, b, n+1)
+    y = np.zeros(n+1)
+    y[0] = y0
+
+    for i in range(n):
+        k1 = h * f(x[i], y[i])
+        k2 = h * f(x[i] + h/2, y[i] + k1/2)
+        k3 = h * f(x[i] + h/2, y[i] + k2/2)
+        k4 = h * f(x[i] + h, y[i] + k3)
+        y[i+1] = y[i] + (k1 + 2*k2 + 2*k3 + k4) / 6
+
+    return x, y
+
+# Define the interval and step size
+a = 0
+b = 2
+h = 0.1
+
+# Initial condition
+y0 = 1
+
+# Solve the ODE using RK4 method
+x, y = rk4(f, a, b, y0, h)
+
+# Plot the solution
+plt.figure(figsize=(4, 3))
+plt.plot(x, y, label='Approximate solution (RK4)')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Numerical Solution of y\' = -y')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+#Q5: Solving the ode y'+y+xy^2=0 using RK method
+#Initial conditions: x=0,y=1,h=0.1
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x, y):
+    return -y - x * y**2
+
+def rk4(f, a, b, y0, h):
+    n = int((b-a)/h)
+    x = np.linspace(a, b, n+1)
+    y = np.zeros(n+1)
+    y[0] = y0
+
+    for i in range(n):
+        k1 = h * f(x[i], y[i])
+        k2 = h * f(x[i] + h/2, y[i] + k1/2)
+        k3 = h * f(x[i] + h/2, y[i] + k2/2)
+        k4 = h * f(x[i] + h, y[i] + k3)
+        y[i+1] = y[i] + (k1 + 2*k2 + 2*k3 + k4) / 6
+
+    return x, y
+
+# Define the interval and step size
+a = 0
+b = 2
+h = 0.1
+
+# Initial condition
+y0 = 1
+
+# Solve the ODE using RK4 method
+x, y = rk4(f, a, b, y0, h)
+
+# Plot the solution
+plt.figure(figsize=(4, 3))
+plt.plot(x, y, label='Approximate solution (RK4)')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Numerical Solution of y\' + y + xy^2 = 0')
+plt.legend()
+plt.grid(True)
+plt.show()
